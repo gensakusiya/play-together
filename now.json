@@ -9,7 +9,7 @@
       }
     },
     {
-      "src": "server/server.js",
+      "src": "server/index.js",
       "use": "@now/node-server"
     }
   ]

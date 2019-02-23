@@ -9,7 +9,7 @@
     "dev": "node ./server",
     "build": "next build",
     "now-build": "next build",
-    "start": "next start",
+    "start": "NODE_ENV=production node ./server -p 8000",
     "test": "jest"
   },
   "devDependencies": {
