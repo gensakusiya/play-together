@@ -10,7 +10,13 @@
     },
     {
       "src": "server/index.js",
-      "use": "@now/node-server"
+      "use": "@now/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/intersection",
+      "dest": "/server/index.js"
     }
   ]
 }
