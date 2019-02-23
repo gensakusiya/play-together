@@ -1,0 +1,28 @@
+{
+  "name": "play-together",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "git@github.com:gensakusiya/play-together.git",
+  "author": "gensakusiya <homoogenecus@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "node ./server",
+    "build": "next build",
+    "now-build": "next build",
+    "start": "next start",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^24.1.0",
+    "prettier": "1.16.4"
+  },
+  "dependencies": {
+    "express": "^4.16.4",
+    "isomorphic-unfetch": "^3.0.0",
+    "next": "^8.0.3-canary.0",
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.7"
+  }
+}
