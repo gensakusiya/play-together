@@ -18,8 +18,6 @@ app
         return res.json([]);
       }
 
-      console.log("get games");
-      console.log(req.query.nick);
       const result = await intersectionHandler(req.query.nick);
 
       return res.json(result);
