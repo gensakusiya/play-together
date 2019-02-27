@@ -11,6 +11,8 @@ export default ({ data, renderItem }) => {
           justify-content: start;
           flex: 1;
           flex-wrap: wrap;
+
+          margin-top: 10px;
         }
       `}</style>
     </div>

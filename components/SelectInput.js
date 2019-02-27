@@ -2,6 +2,35 @@ import React from "react";
 
 import styleVar from "./styles/variables";
 
+const NickItem = ({ nick, onClick }) => (
+  <div className="wrap" onClick={onClick}>
+    <div>{nick}</div>
+    <div className="cross">x</div>
+
+    <style jsx>{`
+      .wrap {
+        border: 1px solid ${styleVar.colors.light};
+        border-radius: ${styleVar.radius.default};
+
+        display: flex;
+        align-items: center;
+        padding: 4px;
+        margin-right: 4px;
+
+        cursor: pointer;
+      }
+
+      .wrap:hover {
+        background-color: ${styleVar.colors.gray};
+      }
+
+      .cross {
+        margin-left: 10px;
+      }
+    `}</style>
+  </div>
+);
+
 class SelectInput extends React.Component {
   state = {
     value: ""
@@ -10,21 +39,43 @@ class SelectInput extends React.Component {
   render() {
     const { value } = this.state;
 
+    const nickLabels = value.split(" ").filter(item => item.trim().length > 0);
+    const nickLabelsHtml = nickLabels.length
+      ? nickLabels.map(nick => (
+          <NickItem
+            key={`${nick}__${Math.random()}`}
+            nick={nick}
+            onClick={() => this.handleClickOnLabel(nick)}
+          />
+        ))
+      : null;
+
     return (
       <div className="wrap">
-        <input
-          placeholder="enter users nick (example - alfred donovan ...)"
-          value={value}
-          onChange={this.handleChange}
-          className="input"
-        />
-        <button onClick={this.handleClick} className="button">
-          search
-        </button>
+        <div className="enter-wrap">
+          <input
+            placeholder="enter users nick (example - alfred donovan ...)"
+            value={value}
+            onChange={this.handleChange}
+            className="input"
+          />
+          <button onClick={this.handleClick} className="button">
+            search
+          </button>
+        </div>
+        <div className="label-wrap">{nickLabelsHtml}</div>
 
         <style jsx>{`
           .wrap {
             display: flex;
+            flex-direction: column;
+          }
+
+          .enter-wrap {
+            display: flex;
+            align-items: center;
+
+            margin-bottom: 10px;
           }
 
           .input {
@@ -91,6 +142,11 @@ class SelectInput extends React.Component {
             background-color: ${styleVar.colors.darkblue};
             border-color: ${styleVar.colors.darkblue};
           }
+
+          .label-wrap {
+            display: flex;
+            align-items: center;
+          }
         `}</style>
       </div>
     );
@@ -99,7 +155,7 @@ class SelectInput extends React.Component {
   handleClick = () => {
     const { value } = this.state;
 
-    const nicks = value.split(" ");
+    const nicks = value.split(" ").filter(item => item.trim().length > 0);
     if (nicks.length > 1) {
       this.props.onLoad(nicks);
     }
@@ -108,6 +164,11 @@ class SelectInput extends React.Component {
   handleChange = e =>
     this.setState({
       value: e.target.value
+    });
+
+  handleClickOnLabel = nick =>
+    this.setState({
+      value: this.state.value.replace(nick, "")
     });
 }
 
